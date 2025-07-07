@@ -112,7 +112,6 @@ const Landing = () => {
                             transition={{duration: 0.5, delay: index * 0.2}}
                             viewport={{amount: 0.4}}
                         >
-                       {/* asdasd */}
                             <CourseCardSearch course={course} onClick={() => handleCourseClick(course.courseId)}/>
                         </motion.div>
                     ))}
