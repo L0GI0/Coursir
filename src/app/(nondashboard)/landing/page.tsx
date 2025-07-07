@@ -6,6 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCarousel } from '@/hooks/useCarousel';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useGetCoursesQuery } from '@/state/api';
+import CourseCardSearch from '@/components/CourseCardSearch';
+import { useRouter } from 'next/navigation';
 
 const LoadingSkeleton = () => {
     return (
@@ -26,7 +29,7 @@ const LoadingSkeleton = () => {
             </div>
             <div className="landing-skeleton__tags">
                 {[1,2,3,4,5].map((_, index) => (
-                    <Skeleton key={index} className="landing-skeleton__tags"/>
+                    <Skeleton key={index} className="landing-skeleton__tag"/>
                 ))}
             </div>
             <div className="landing-skeleton__courses">
@@ -39,8 +42,17 @@ const LoadingSkeleton = () => {
 }
 
 const Landing = () => {
-
+  const router = useRouter();
   const currentImage = useCarousel({ totalImages: 3});
+  const { data: courses, isLoading, isError } = useGetCoursesQuery({});
+
+  if(isLoading) {
+    return <LoadingSkeleton/>
+  }
+
+  const handleCourseClick = (courseId: string) => {
+    router.push(`/search?id=${courseId}`)
+  }
 
   return (
     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}} className="landing">
@@ -87,12 +99,23 @@ const Landing = () => {
                     From beginner to advanced in all industries, we have the right courses just
                     for you and preparing your entire journey for leadning and making the most.
                 </p>
-                <div className="ladning__tags">{["web development", "enterprise IT", "react nextjs", "javascript", "enterprise IT"].map((tag, index) => (
+                <div className="landing__tags">{["web development", "enterprise IT", "react nextjs", "javascript", "enterprise IT"].map((tag, index) => (
                     <span key={index} className="landing__tag">{tag}</span>))}
                 </div>
 
                 <div className="landing__courses">
-                    { /* COURSES DISPLAY */}
+                    { courses && courses.slice(0, 4).map((course, index) => (
+                        <motion.div
+                            key={course.courseId}
+                            initial={{y: 50, opacity: 0}}
+                            whileInView={{y: 0, opacity: 1}}
+                            transition={{duration: 0.5, delay: index * 0.2}}
+                            viewport={{amount: 0.4}}
+                        >
+                       {/* asdasd */}
+                            <CourseCardSearch course={course} onClick={() => handleCourseClick(course.courseId)}/>
+                        </motion.div>
+                    ))}
                 </div>
             </motion.div>
     </motion.div>
