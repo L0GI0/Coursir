@@ -46,6 +46,7 @@ const Landing = () => {
   const currentImage = useCarousel({ totalImages: 3});
   const { data: courses, isLoading, isError } = useGetCoursesQuery({});
 
+
   if(isLoading) {
     return <LoadingSkeleton/>
   }
