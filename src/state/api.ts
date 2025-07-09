@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BaseQueryApi, FetchArgs } from '@reduxjs/toolkit/query';
+import { User } from '@clerk/nextjs/server';
 
+// Created to get the data directly, without nested .data objects
 const customBaseQuery = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
@@ -26,8 +28,16 @@ const customBaseQuery = async (
 export const api = createApi({
   baseQuery: customBaseQuery,
   reducerPath: "api",
-  tagTypes: ["Courses"], //represent data that we receive from backend
+  tagTypes: ["Courses", "Users"], //represent data that we receive from backend
   endpoints: (build) => ({
+    updateUser: build.mutation<User, Partial<User> & { userId: string}>({
+      query: ({ userId, ...updatedUser}) => ({
+        url: `users/clerk/${userId}`,
+        method: "PUT",
+        body: updatedUser
+      }),
+      invalidatesTags: ["Users"] // Any time we update list of users - the entire list will be refetch
+    }),
     getCourses: build.query<Course[], { category?: string}>({
       query: ({ category }) => ({
         url: "courses",
@@ -42,4 +52,4 @@ export const api = createApi({
   })
 });
 
-export const { useGetCoursesQuery, useGetCourseQuery } = api;
+export const { useUpdateUserMutation, useGetCoursesQuery, useGetCourseQuery } = api;
