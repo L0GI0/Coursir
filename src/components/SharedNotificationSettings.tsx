@@ -19,8 +19,6 @@ const SharedNotificationSettings = ({
   const { user } = useUser();
   const [ updateUser ] = useUpdateUserMutation();
 
-  console.log(`User = `, user);
-
   const currentSettings = (user?.publicMetadata as { settings?: UserSettings})?.settings || {}
     
   const methods = useForm<NotificationSettingsFormData>({
