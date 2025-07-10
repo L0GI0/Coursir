@@ -59,7 +59,7 @@ const customBaseQuery = async (
 export const api = createApi({
   baseQuery: customBaseQuery,
   reducerPath: "api",
-  tagTypes: ["Courses", "Users"], //represent data that we receive from backend
+  tagTypes: ["Courses", "Users"], // represent data that we receive from backend
   endpoints: (build) => ({
     updateUser: build.mutation<User, Partial<User> & { userId: string}>({
       query: ({ userId, ...updatedUser}) => ({
@@ -79,8 +79,20 @@ export const api = createApi({
     getCourse: build.query<Course, string>({
       query: (id) => `courses/${id}`,
       providesTags: (result, error, id) => [{ type: "Courses", id}] // Will update specific course automatically 
-    })
+    }),
+    createStripePaymentIntent: build.mutation<{clientSecret: string}, { amount: number }>({
+      query: ({ amount }) => ({
+        url: `transactions/stripe/payment-intent`,
+        method: "POST",
+        body: { amount }
+      }),
+    }),
   })
 });
 
-export const { useUpdateUserMutation, useGetCoursesQuery, useGetCourseQuery } = api;
+export const {
+  useUpdateUserMutation,
+  useGetCoursesQuery,
+  useGetCourseQuery,
+  useCreateStripePaymentIntentMutation 
+} = api;
