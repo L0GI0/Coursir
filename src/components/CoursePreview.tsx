@@ -2,24 +2,11 @@ import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 import React from 'react'
 import AccordionSections from './AccordionSections';
-import { GuestFormData, guestSchema } from '@/lib/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { CustomFormField } from './CustomFormField';
-import { Form } from '@/components/ui/form';
-import { Button } from './ui/button';
 
 const CoursePreview = ({ course }: CoursePreviewProps) => {
 
   const price = formatPrice(course.price);
     
-  const methods = useForm<GuestFormData>({
-    resolver: zodResolver(guestSchema),
-    defaultValues: {
-        email: "",
-    },
-  });
-
   return (
     <div className="course-preview">
         <div className="course-preview__container">

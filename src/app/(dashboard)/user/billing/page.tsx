@@ -17,8 +17,6 @@ const UserBilling = () => {
     skip: !isLoaded || !user
   });
 
-
-
   if(!isLoaded) return <Loading/>
 
   if(!user) return <div>Please sign in to view your billing information</div>;

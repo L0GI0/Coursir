@@ -61,6 +61,11 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: ["Courses", "Users"], // represent data that we receive from backend
   endpoints: (build) => ({
+    /* 
+    ==========
+    USER CLERK 
+    ==========
+    */
     updateUser: build.mutation<User, Partial<User> & { userId: string}>({
       query: ({ userId, ...updatedUser}) => ({
         url: `users/clerk/${userId}`,
@@ -69,6 +74,12 @@ export const api = createApi({
       }),
       invalidatesTags: ["Users"] // Any time we update list of users - the entire list will be refetch
     }),
+
+    /* 
+    ==========
+    COURSES 
+    ==========
+    */
     getCourses: build.query<Course[], { category?: string}>({
       query: ({ category }) => ({
         url: "courses",
@@ -83,6 +94,36 @@ export const api = createApi({
     getTransactions: build.query<Transaction[], string>({
       query: (userId) => `transactions?userId=${userId}`
     }),
+    createCourse: build.mutation<Course, { teacherId: string, teacherName: string}>({
+      query: (body) => ({
+        url: `courses`,
+        method: "POST",
+        body: body
+      }),
+      invalidatesTags: ["Courses"],
+    }),
+    updateCourse: build.mutation<Course, { courseId: string, formData: FormData}>({
+      query: ({courseId, formData}) => ({
+        url: `courses/${courseId}`,
+        method: "PUT",
+        body: formData
+      }),
+      invalidatesTags: ( result, error, { courseId }) => [
+        {type: "Courses", id: courseId }
+      ]
+    }),
+    deleteCourse: build.mutation<{ message: string }, string>({
+      query: (courseId) => ({
+        url: `courses/${courseId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Courses"],
+    }),
+    /* 
+    ==========
+    TRANSACTION 
+    ==========
+    */
     createStripePaymentIntent: build.mutation<{clientSecret: string}, { amount: number }>({
       query: ({ amount }) => ({
         url: `transactions/stripe/payment-intent`,
@@ -102,6 +143,9 @@ export const api = createApi({
 
 export const {
   useUpdateUserMutation,
+  useCreateCourseMutation,
+  useUpdateCourseMutation,
+  useDeleteCourseMutation,
   useGetCoursesQuery,
   useGetCourseQuery,
   useGetTransactionsQuery,
