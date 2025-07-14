@@ -1319,7 +1319,7 @@ input[type="color"] {
 }
 
 .course-card-teacher__category {
-  @apply bg-customgreys-dirtyGrey/50 px-2 py-1 mt-3 mb-3 rounded-xl w-fit text-sm;
+  @apply bg-customgreys-dirtyGrey/50 text-white-50 px-2 py-1 mt-3 mb-3 rounded-xl w-fit text-sm;
 }
 
 .course-card-teacher__edit-button {
