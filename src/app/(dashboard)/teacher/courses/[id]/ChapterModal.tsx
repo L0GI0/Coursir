@@ -102,7 +102,9 @@ const ChapterModal = () => {
             </div>
 
             <Form {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <form
+                  onSubmit={methods.handleSubmit(onSubmit)}
+                  className="chaper-modal__form">
                     <CustomFormField
                         name="title"
                         label="Chapter Title"
@@ -124,6 +126,17 @@ const ChapterModal = () => {
                                 </FormLabel>
                                 <FormControl>
                                     <div>
+                                    <Input
+                                        type="file"
+                                        accept="video/*"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if(file){
+                                                onChange(file);
+                                            }
+                                        }}
+                                        className="border-none bg-customgreys-darkGrey p-4 cursor-pointer"
+                                    />
                                     {typeof value === "string" && value && (
                                         <div className="mb-2 text-sm text-customgreys-dirtyGrey">
                                             Current video: {value.split("/").pop()}
@@ -134,18 +147,7 @@ const ChapterModal = () => {
                                             Selected file: { value.name }
                                         </div>
                                     )}
-                                    <Input
-                                        type="file"
-                                        accept="video/*"
-                                        onChange={(e) => {
-                                            const file = e.target.files?.[0];
-                                            if(file){
-                                                onChange(file);
-                                            }
-                                        }}
-                                        className="border-none bg-customgreys-darkGrey p-4"
-                                    />
-                                    </div>
+                                  </div>
                                 </FormControl>
                                 <FormMessage className="text-red-400" />
                             </FormItem>

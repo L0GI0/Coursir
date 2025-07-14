@@ -110,7 +110,7 @@ const AppSidebar = () => {
                             className={cn("app-sidebar__nav-item", isActive && "bg-gray-800")}
                         >
                             <SidebarMenuButton asChild size="lg" className={cn("app-sidebar__nav-button", !isActive && "text-customgreys-dirtyGrey")}>
-                                <Link href={link.href} className="app-sizebar__nav-link">
+                                <Link href={link.href} className="app-sizebar__nav-link" scroll={false}>
                                     <link.icon
                                         className={isActive ? 'text-white-50' : 'text-grey-500'}
                                     />

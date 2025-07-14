@@ -11,16 +11,14 @@ const NonDashboardNavbar = () => {
   const { user } = useUser();
   const userRole = user?.publicMetadata?.userType as "student" | "teacher";
 
-  console.log(`userRole = `, userRole);
-
   return (
     <nav className="nondashboard-navbar">
         <div className="nondashboard-navbar__container">
             <div className="nondashboard-navbar__search">
-            <Link href="/" className="nondashboard-navbar__brand">COURSIR</Link>
+            <Link href="/" scroll={false} className="nondashboard-navbar__brand">COURSIR</Link>
             <div className="flex items-center gap-4">
                 <div className="relative group">
-                    <Link href="/search" className="nondashboard-navbar__search-input">
+                    <Link href="/search" className="nondashboard-navbar__search-input" scroll={false}>
                         <span className="hidden sm:inline">
                             Search Courses
                         </span>
@@ -54,10 +52,10 @@ const NonDashboardNavbar = () => {
                     />
                 </SignedIn>
                 <SignedOut>
-                    <Link href="/signin" className="nondashboard-navbar__auth-button--login">
+                    <Link href="/signin" className="nondashboard-navbar__auth-button--login" scroll={false}>
                         Log In
                     </Link>
-                    <Link href="/signup" className="nondashboard-navbar__auth-button--signup">
+                    <Link href="/signup" className="nondashboard-navbar__auth-button--signup" scroll={false}>
                         Sign Up
                     </Link>
                 </SignedOut>

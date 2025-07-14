@@ -43,7 +43,9 @@ const Courses = () => {
     }, [courses, searchTerm, selectedCategory])
 
     const handleEdit = (course: Course) => {
-        router.push(`/teacher/courses/${course.courseId}`);
+        router.push(`/teacher/courses/${course.courseId}`, {
+            scroll: false
+        });
     }
 
     const handleDelete = async (course: Course) => {
@@ -60,7 +62,9 @@ const Courses = () => {
             teacherName: user.fullName || "Unknown Teacher",
         }).unwrap();
 
-        router.push(`/teacher/courses/${result.courseId}`);
+        router.push(`/teacher/courses/${result.courseId}`, {
+            scroll: false
+        });
     }
 
     if(isLoading) return <Loading/>
