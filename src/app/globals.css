@@ -643,7 +643,7 @@ input[type="color"] {
 }
 
 .course__video-container {
-  @apply h-[50vh] flex justify-center items-center p-0 m-0;
+  @apply h-[50vh] flex justify-center items-center p-0 m-0 bg-customgreys-primarybg;
 }
 
 .course__no-video {
@@ -659,11 +659,11 @@ input[type="color"] {
 }
 
 .course__tabs-list {
-  @apply flex justify-start gap-10;
+  @apply flex justify-start gap-10 bg-customgreys-secondarybg;
 }
 
 .course__tab {
-  @apply text-md w-20;
+  @apply text-md w-24 bg-customgreys-primarybg text-white-50;
 }
 
 .course__tab-content {
@@ -671,7 +671,7 @@ input[type="color"] {
 }
 
 .course__tab-card {
-  @apply !border-none shadow-none;
+  @apply !border-none shadow-none bg-customgreys-primarybg text-white-100;
 }
 
 .course__tab-header {
@@ -687,7 +687,7 @@ input[type="color"] {
 }
 
 .course__instructor-info {
-  @apply flex flex-col items-start p-0 px-4;
+  @apply flex flex-col items-start p-0 px-4 text-white-50;
 }
 
 .course__instructor-header {
@@ -785,7 +785,7 @@ input[type="color"] {
 }
 
 .chapters-sidebar__progress-text {
-  @apply text-gray-500 text-xs mt-3 mb-5 px-7;
+  @apply text-gray-500 text-xs mt-3 mb-5 px-7 text-gray-400;
 }
 
 .chapters-sidebar__chapter {
@@ -813,7 +813,7 @@ input[type="color"] {
 }
 
 .chapters-sidebar__chapter-title {
-  @apply flex-1 text-sm text-gray-500;
+  @apply flex-1 text-sm text-gray-200;
 }
 
 .chapters-sidebar__chapter-title--completed {
@@ -1007,7 +1007,7 @@ input[type="color"] {
 }
 
 .course-card__title {
-  @apply text-md lg:text-lg font-semibold line-clamp-2;
+  @apply text-md lg:text-lg font-semibold line-clamp-2 text-white-50;
 }
 
 .course-card__footer {

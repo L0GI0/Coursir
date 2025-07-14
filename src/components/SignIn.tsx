@@ -27,7 +27,7 @@ const SignInComponent = () => {
         return "/teacher/courses"
     }
 
-    return "/users/courses";
+    return "/user/courses";
   }
 
   return (
